@@ -1,6 +1,6 @@
 /* Application-wide Styles */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-
+@import '../node_modules/flatpickr/dist/flatpickr.css'; 
 h1 {
     color: #369;
     font-family: Arial, Helvetica, sans-serif;
