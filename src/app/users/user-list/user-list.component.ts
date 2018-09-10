@@ -11,7 +11,6 @@ import { UserDetailsComponent } from '../user-details/user-details.component';
 })
 
 export class UserListComponent implements OnInit {
-
   users: User[];
   selectedUser: User;
 

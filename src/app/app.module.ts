@@ -43,8 +43,8 @@ import { CalendarUpcomingComponent } from './calendar-upcoming/calendar-upcoming
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    FlatpickrModule.forRoot()
-
+    FlatpickrModule.forRoot(),
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

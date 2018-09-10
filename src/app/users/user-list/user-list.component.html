@@ -12,11 +12,11 @@
       <button class="btn btn-warning" (click)="createNewUser()">New</button>
     </div>
     <div class="col-md-5 col-md-offset-2">
-      <user-details
+      <app-user-details
         [user]="selectedUser"
         [createHandler]="addUser"
         [updateHandler]="updateUser"
         [deleteHandler]="deleteUser">
-      </user-details>
+      </app-user-details>
     </div>
   </div>

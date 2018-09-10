@@ -37,31 +37,41 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-/*  "/api/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
+/*  "/api/users"
+ *    GET: finds all users
+ *    POST: creates a new user
  */
 
-app.get("/api/contacts", function(req, res) {
+app.get("/api", function(req, res) {
+  res.status(200).json({"status": "200", "message": "Welcome to the team calendar API"});
+});
+
+
+/*  "/api/users"
+ *    GET: finds all users
+ *    POST: creates a new user
+ */
+
+app.get("/api/users", function(req, res) {
   db.collection(USERS).find({}).toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
+      handleError(res, err.message, "Failed to get users.");
     } else {
       res.status(200).json(docs);
     }
   });
 });
 
-app.post("/api/contacts", function(req, res) {
-  var newContact = req.body;
-  newContact.createDate = new Date();
+app.post("/api/users", function(req, res) {
+  var newUser = req.body;
+  newUser.createDate = new Date();
 
   if (!req.body.name) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
   } else {
-    db.collection(USERS).insertOne(newContact, function(err, doc) {
+    db.collection(USERS).insertOne(newUser, function(err, doc) {
       if (err) {
-        handleError(res, err.message, "Failed to create new contact.");
+        handleError(res, err.message, "Failed to create new user.");
       } else {
         res.status(201).json(doc.ops[0]);
       }
@@ -69,29 +79,29 @@ app.post("/api/contacts", function(req, res) {
   }
 });
 
-/*  "/api/contacts/:id"
- *    GET: find contact by id
- *    PUT: update contact by id
- *    DELETE: deletes contact by id
+/*  "/api/users/:id"
+ *    GET: find user by id
+ *    PUT: update user by id
+ *    DELETE: deletes user by id
  */
 
-app.get("/api/contacts/:id", function(req, res) {
+app.get("/api/users/:id", function(req, res) {
   db.collection(USERS).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to get contact");
+      handleError(res, err.message, "Failed to get user");
     } else {
       res.status(200).json(doc);
     }
   });
 });
 
-app.put("/api/contacts/:id", function(req, res) {
+app.put("/api/users/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
   db.collection(USERS).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to update contact");
+      handleError(res, err.message, "Failed to update user");
     } else {
       updateDoc._id = req.params.id;
       res.status(200).json(updateDoc);
@@ -99,10 +109,10 @@ app.put("/api/contacts/:id", function(req, res) {
   });
 });
 
-app.delete("/api/contacts/:id", function(req, res) {
+app.delete("/api/users/:id", function(req, res) {
   db.collection(USERS).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
     if (err) {
-      handleError(res, err.message, "Failed to delete contact");
+      handleError(res, err.message, "Failed to delete user");
     } else {
       res.status(200).json(req.params.id);
     }
