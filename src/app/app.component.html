@@ -3,10 +3,11 @@
 </h1>
 <nav>
     <a routerLink="/heroes">Heroes</a>
-</nav>
-<nav>
     <a routerLink="/dashboard">Dashboard</a>
-</nav>  
+    <a routerLink="/users">Users</a>
+    <a routerLink="/calendar">Calendar</a>
+</nav>
+<app-calendar-upcoming></app-calendar-upcoming>
 
 <router-outlet></router-outlet>
 <app-messages></app-messages>
