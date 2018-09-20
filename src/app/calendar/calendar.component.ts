@@ -18,11 +18,14 @@ import {
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { VacationEvent,
+  VacationEventAction,
+  VacationEventTimesChangedEvent
+ } from '../events/vacation-event';
+import { VacationEventService } from '../events/vacation-event.service';
+import { Eventtype } from '../events/eventtype.enum';
 
 const colors: any = {
   red: {
@@ -46,6 +49,8 @@ const colors: any = {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+  events: VacationEvent[];
+
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
 
@@ -57,19 +62,19 @@ export class CalendarComponent implements OnInit {
 
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: VacationEvent;
   };
 
-  actions: CalendarEventAction[] = [
+  actions: VacationEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: VacationEvent }): void => {
         this.handleEvent('Edited', event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: VacationEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -78,56 +83,20 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
-
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private eventService: VacationEventService) {}
 
   ngOnInit() {
-  }
+    this.eventService
+     .getEvents()
+     .then((events: VacationEvent[]) => {
+       this.events = events;
+     });
+ }
 
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  dayClicked({ date, events }: { date: Date; events: VacationEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -145,20 +114,21 @@ export class CalendarComponent implements OnInit {
     event,
     newStart,
     newEnd
-  }: CalendarEventTimesChangedEvent): void {
+  }: VacationEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: VacationEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
     this.events.push({
+      // TODO CHANGE THIS
       title: 'New event',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
@@ -167,7 +137,10 @@ export class CalendarComponent implements OnInit {
       resizable: {
         beforeStart: true,
         afterEnd: true
-      }
+      },
+      // TODO CHANGE THIS
+      user: 'new user',
+      type: Eventtype.vacation
     });
     this.refresh.next();
   }
