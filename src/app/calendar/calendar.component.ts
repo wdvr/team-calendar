@@ -27,6 +27,8 @@ import { VacationEvent,
 import { VacationEventService } from '../events/vacation-event.service';
 import { Eventtype } from '../events/eventtype.enum';
 
+import { CalendarDetailsComponent } from '../calendar-details/calendar-details.component';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -50,6 +52,7 @@ const colors: any = {
 })
 export class CalendarComponent implements OnInit {
   events: VacationEvent[];
+  selectedEvent: VacationEvent;
 
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
@@ -92,6 +95,7 @@ export class CalendarComponent implements OnInit {
      .getEvents()
      .then((events: VacationEvent[]) => {
        this.events = events;
+       this.refresh.next();
      });
  }
 
@@ -126,22 +130,54 @@ export class CalendarComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events.push({
+  selectEvent(event: VacationEvent) {
+    this.selectedEvent = event;
+  }
+
+  private getIndexOfEvent = (eventId: String | Number) => {
+    return this.events.findIndex((event) => {
+      return event.id === eventId;
+    });
+  }
+
+
+  createEvent(): VacationEvent[] {
+    const event = {
       // TODO CHANGE THIS
-      title: 'New event',
+      title: '',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
-      color: colors.red,
+      color: {primary: colors.red, secondary: colors.blue},
       draggable: true,
       resizable: {
         beforeStart: true,
         afterEnd: true
       },
       // TODO CHANGE THIS
-      user: 'new user',
+      user: '',
       type: Eventtype.vacation
-    });
-    this.refresh.next();
+    };
+    this.events.push(event);
+    this.selectEvent(event);
+    return this.events;
   }
+
+  deleteEvent = (eventId: String) => {
+    const idx = this.getIndexOfEvent(eventId);
+    if (idx !== -1) {
+      this.events.splice(idx, 1);
+      this.selectEvent(null);
+    }
+    return this.events;
+  }
+
+  updateEvent = (event: VacationEvent) => {
+    const idx = this.getIndexOfEvent(event.id);
+    if (idx !== -1) {
+      this.events[idx] = event;
+      this.selectEvent(event);
+    }
+    return this.events;
+  }
+
 }

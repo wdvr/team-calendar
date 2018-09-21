@@ -21,6 +21,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { CalendarUpcomingComponent } from './calendar-upcoming/calendar-upcoming.component';
+import { CalendarDetailsComponent } from './calendar-details/calendar-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CalendarUpcomingComponent } from './calendar-upcoming/calendar-upcoming
     CalendarComponent,
     UserListComponent,
     CalendarUpcomingComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    CalendarDetailsComponent
   ],
   imports: [
     BrowserModule,

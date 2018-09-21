@@ -103,7 +103,7 @@
     Edit events
     <button
       class="btn btn-primary pull-right"
-      (click)="addEvent()">
+      (click)="createEvent()">
       Add new
     </button>
     <div class="clearfix"></div>
@@ -113,12 +113,11 @@
   
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
+        <th>Who?</th>
+        <th>Type</th>
         <th>Starts at</th>
         <th>Ends at</th>
-        <th>Remove</th>
+        <th>Color</th>
       </tr>
     </thead>
   
@@ -126,22 +125,14 @@
       <tr *ngFor="let event of events; let index = index">
         <td>
           <input
+            type="user"
+            [(ngModel)]="event.user">
+        </td>
+        <td>
+          <input
             type="text"
             class="form-control"
-            [(ngModel)]="event.title"
-            (keyup)="refresh.next()">
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()">
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()">
+            [(ngModel)]="event.type">
         </td>
         <td>
           <input
@@ -149,7 +140,6 @@
             type="text"
             mwlFlatpickr
             [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()"
             dateFormat="Y-m-dTH:i"
             altFormat="F j, Y H:i"
             placeholder="Not set">
@@ -160,20 +150,41 @@
             type="text"
             mwlFlatpickr
             [(ngModel)]="event.end"
-            (ngModelChange)="refresh.next()"
             dateFormat="Y-m-dTH:i"
             altFormat="F j, Y H:i"
             placeholder="Not set">
         </td>
         <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.primary">
+        </td>
+        <td>
+          <button
+            class="btn btn-info"
+            (click)="updateEvent(event); refresh.next()">
+            Save
+          </button>
+        </td>
+        <td>
           <button
             class="btn btn-danger"
-            (click)="events.splice(index, 1); refresh.next()">
+            (click)="deleteEvent(event); refresh.next()">
             Delete
           </button>
         </td>
       </tr>
     </tbody>
-  
+
+    <div class="col-md-5 col-md-offset-2">
+      <app-calendar-details
+        [event]="selectedEvent"
+        [refresh]="refresh"
+        [createHandler]="createEvent"
+        [updateHandler]="updateEvent"
+        [deleteHandler]="deleteEvent">
+      </app-calendar-details>
+    </div>
+
   </table>
   

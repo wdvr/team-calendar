@@ -39,6 +39,7 @@ export class UserListComponent implements OnInit {
       username: '',
       name: '',
       email: '',
+      color: {primary: '#' + Math.floor(Math.random() * 16777215).toString(16), secondary: ''}
     };
 
     // By default, a newly-created user will have the selected state.

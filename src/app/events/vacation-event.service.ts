@@ -38,59 +38,16 @@ export class VacationEventService {
   private eventsUrl = '/api/events';
 
   constructor(private http: Http) { }
-
-  events: VacationEvent[] = [
-    {
-      id: '1',
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      user: 'Peter',
-      type: Eventtype.sickday,
-      color: colors.red,
-      actions: null,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      id: '2',
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-      user: 'Paul',
-      type: Eventtype.vacation,
-    },
-    {
-      id: '3',
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      user: 'Ruben',
-      type: Eventtype.workfromhome,
-      actions: null,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
-
+  events: VacationEvent[];
 
   // get("/api/events")
   getEvents(): Promise<void | VacationEvent[]> {
-    return Promise.resolve(this.events);
-    // return this.http.get(this.eventsUrl)
-    //   .toPromise()
-    //   .then(response => response.json() as VacationEvent[])
-    //   .catch(this.handleError);
+    // return Promise.resolve(this.events);
+    return this.http.get(this.eventsUrl)
+      .toPromise()
+      .then(response => response.json() as VacationEvent[])
+      .then(events => events.map(this.deserializeDates))
+      .catch(this.handleError);
   }
 
   // post("/api/events")
@@ -104,7 +61,7 @@ export class VacationEventService {
   // get("/api/events/:id") endpoint not used by Angular app
 
   // delete("/api/events/:id")
-  deletEvent(delEvendId: String): Promise<void | String> {
+  deleteEvent(delEvendId: String): Promise<void | String> {
     return this.http.delete(this.eventsUrl + '/' + delEvendId)
       .toPromise()
       .then(response => response.json() as String)
@@ -123,6 +80,14 @@ export class VacationEventService {
   private handleError(error: any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
+    console.error(errMsg);
+  }
+
+  private deserializeDates(event: VacationEvent<any>) {
+    event.start = new Date(event.start);
+    event.end = new Date(event.end);
+    return event;
   }
 }
+
+

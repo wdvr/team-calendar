@@ -18,6 +18,12 @@
       <label for="user-email">Email</label>
       <input class="form-control" name="user-email" [(ngModel)]="user.email" placeholder="david.jones@agfa.com" />
     </div>
+
+    <div class="form-group">
+      <label for="user-color">Color</label>
+      <input class="form-control" name="user-color" type="color" [(ngModel)]="user.color">
+    </div>
+
     <button class="btn btn-primary" *ngIf="!user._id" (click)="createUser(user)">Create</button>
     <button class="btn btn-info" *ngIf="user._id" (click)="updateUser(user)">Update</button>
     <button class="btn btn-danger" *ngIf="user._id" (click)="deleteUser(user._id)">Delete</button>
