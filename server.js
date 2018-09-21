@@ -96,8 +96,7 @@ app.get("/api/users/:id", function(req, res) {
 app.put("/api/users/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
-
-  db.collection(USERS).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+  db.collection(USERS).replaceOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update user");
     } else {

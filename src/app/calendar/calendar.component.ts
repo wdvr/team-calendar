@@ -28,6 +28,7 @@ import { VacationEventService } from '../events/vacation-event.service';
 import { Eventtype } from '../events/eventtype.enum';
 
 import { CalendarDetailsComponent } from '../calendar-details/calendar-details.component';
+import { User } from '../users/user';
 
 const colors: any = {
   red: {
@@ -154,7 +155,7 @@ export class CalendarComponent implements OnInit {
         afterEnd: true
       },
       // TODO CHANGE THIS
-      user: '',
+      user: new User(),
       type: Eventtype.vacation
     };
     this.events.push(event);

@@ -3,9 +3,10 @@ import { Eventtype } from './eventtype.enum';
 import {
     CalendarEvent, CalendarEventTimesChangedEventType,
   } from 'angular-calendar';
+import { User } from '../users/user';
 
 export interface VacationEvent<MetaType = any> extends CalendarEvent {
-    user: string;
+    user: User;
     type: Eventtype;
 }
 
