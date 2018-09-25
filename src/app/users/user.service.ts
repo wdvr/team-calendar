@@ -27,7 +27,13 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  // get("/api/users/:id") endpoint not used by Angular app
+  // get("/api/users/:id")
+  getUser(userId: String): Promise<void | User> {
+    return this.http.get(this.usersUrl + '/' + userId)
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
 
   // delete("/api/users/:id")
   deleteUser(delUserId: String): Promise<void | String> {

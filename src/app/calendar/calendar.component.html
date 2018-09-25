@@ -76,7 +76,7 @@
       [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="editEvent($event.event._id)"
       (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
@@ -84,7 +84,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="editEvent($event.event._id)"
       (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
@@ -92,7 +92,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="editEvent($event.event._id)"
       (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-day-view>
   </div>
@@ -123,20 +123,29 @@
     <tbody>
       <tr *ngFor="let event of events; let index = index">
         <td>
-          <input
-            type="user"
-            [(ngModel)]="event.user">
+            <select class="form-control" name="sel" 
+            [(ngModel)]="event.user"
+            [disabled]="editingEvent != event._id" 
+            >
+          <option *ngFor="let user of users" [ngValue]="user">
+            {{user.name}}
+          </option>
+        </select>        
+      </td>
+        <td>
+            <select class="form-control" name="sel" 
+            [(ngModel)]="event.type"
+            [disabled]="editingEvent != event._id">
+          <option *ngFor="let key of eventTypeKeys" [ngValue]="key">
+            {{eventTypes[key]}}
+          </option>
+        </select>        
         </td>
         <td>
           <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="event.type">
-        </td>
-        <td>
-          <input
             class="form-control"
             type="text"
+            [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.start"
             dateFormat="Y-m-dTH:i"
@@ -147,6 +156,7 @@
           <input
             class="form-control"
             type="text"
+            [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.end"
             dateFormat="Y-m-dTH:i"
@@ -154,31 +164,33 @@
             placeholder="Not set">
         </td>
         <td>
-          <button
-            class="btn btn-info"
-            (click)="updateEvent(event); refresh.next()">
-            Save
+            <button
+            class="btn btn-info fa-pencil"
+            (click)="editEvent(event._id); refresh.next()"
+            *ngIf="editingEvent != event._id">
+            Edit
           </button>
         </td>
         <td>
+
           <button
-            class="btn btn-danger"
-            (click)="deleteEvent(event); refresh.next()">
-            Delete
-          </button>
+          class="btn btn-info fa-pencil"
+          (click)="updateEvent(event); refresh.next()"
+          *ngIf="editingEvent == event._id">
+          Save
+        </button>
+      </td>
+      <td>
+
+          <button
+          class="btn btn-info fa-pencil"
+          (click)="deleteEvent(event._id); refresh.next()">
+          Delete
+        </button>
+
         </td>
       </tr>
     </tbody>
-
-    <div class="col-md-5 col-md-offset-2">
-      <app-calendar-details
-        [event]="selectedEvent"
-        [refresh]="refresh"
-        [createHandler]="createEvent"
-        [updateHandler]="updateEvent"
-        [deleteHandler]="deleteEvent">
-      </app-calendar-details>
-    </div>
 
   </table>
   

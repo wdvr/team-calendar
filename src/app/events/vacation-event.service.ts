@@ -14,6 +14,7 @@ import {
 } from 'angular-calendar';
 import { VacationEvent } from './vacation-event';
 import { Eventtype } from './eventtype.enum';
+import { User } from '../users/user';
 
 const colors: any = {
   red: {
@@ -43,6 +44,7 @@ export class VacationEventService {
   // get("/api/events")
   getEvents(): Promise<void | VacationEvent[]> {
     // return Promise.resolve(this.events);
+
     return this.http.get(this.eventsUrl)
       .toPromise()
       .then(response => response.json() as VacationEvent[])
@@ -70,7 +72,7 @@ export class VacationEventService {
 
   // put("/api/events/:id")
   updateEvent(putEvent: VacationEvent): Promise<void | VacationEvent> {
-    const putUrl = this.eventsUrl + '/' + putEvent.id;
+    const putUrl = this.eventsUrl + '/' + putEvent._id;
     return this.http.put(putUrl, putEvent)
       .toPromise()
       .then(response => response.json() as VacationEvent)

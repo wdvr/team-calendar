@@ -6,6 +6,7 @@ import {
 import { User } from '../users/user';
 
 export interface VacationEvent<MetaType = any> extends CalendarEvent {
+    _id?: string;
     user: User;
     type: Eventtype;
 }

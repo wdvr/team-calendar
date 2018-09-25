@@ -26,17 +26,17 @@
     <input type="color" [(ngModel)]="event.color.secondary">
   </div>
   <div>
-    <button class="btn btn-info" *ngIf="event.id" (click)="updateEvent(event); refresh.next()">
+    <button class="btn btn-info" *ngIf="event._id" (click)="updateEvent(event); refresh.next()">
       Save
     </button>
   </div>
   <div>
-    <button class="btn btn-danger" *ngIf="event.id" (click)="deleteEvent(event); refresh.next()">
+    <button class="btn btn-danger" *ngIf="event._id" (click)="deleteEvent(event); refresh.next()">
       Delete
     </button>
   </div>
   <div>
-    <button class="btn btn-primary" *ngIf="!event.id" (click)="createEvent(event); refresh.next()">
+    <button class="btn btn-primary" *ngIf="!event._id" (click)="createEvent(event); refresh.next()">
       Create
     </button>
   </div>
