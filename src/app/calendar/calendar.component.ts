@@ -82,14 +82,15 @@ export class CalendarComponent implements OnInit {
       this.eventService
       .getEvents()
       .then((events: VacationEvent[]) => {
-        console.log(this.users);
-       events.forEach(e => e.title = e.user.name + ': ' + this.eventTypes[e.type]);
-       events.forEach(e => e.color.primary = this.users.filter(user => user.username === e.user.name)[0].color);
-       events.forEach(e => e.color.secondary = this.users.filter(user => user.username === e.user.name)[0].color);
-       console.log(events);
+        events.forEach(e => {
+          const eventUser = this.users.filter(user => user.username === e.user)[0];
+          e.title = eventUser.name + ': ' + this.eventTypes[e.type];
+          e.color.primary = eventUser.color;
+          e.color.secondary = eventUser.color;
+        });
        this.events = events;
        this.refresh.next();
-      }); 
+      });
     });
  }
 
@@ -145,7 +146,7 @@ export class CalendarComponent implements OnInit {
         afterEnd: true
       },
       // TODO CHANGE THIS
-      user: new User(),
+      user: 'newuser',
       type: Eventtype.vacation
     };
 

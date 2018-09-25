@@ -124,7 +124,7 @@
       <tr *ngFor="let event of events; let index = index">
         <td>
             <select class="form-control" name="selectUser" 
-            [(ngModel)]="event.user.name"
+            [(ngModel)]="event.user"
             [disabled]="editingEvent != event._id" 
             >
           <option *ngFor="let user of users" value="{{user.username}}">
