@@ -54,6 +54,7 @@ export class VacationEventService {
 
   // post("/api/events")
   createEvent(newEvent: VacationEvent): Promise<void | VacationEvent> {
+    console.log('will create event: ', newEvent);
     return this.http.post(this.eventsUrl, newEvent)
       .toPromise()
       .then(response => response.json() as VacationEvent)

@@ -123,17 +123,17 @@
     <tbody>
       <tr *ngFor="let event of events; let index = index">
         <td>
-            <select class="form-control" name="sel" 
-            [(ngModel)]="event.user"
+            <select class="form-control" name="selectUser" 
+            [(ngModel)]="event.user.name"
             [disabled]="editingEvent != event._id" 
             >
-          <option *ngFor="let user of users" [ngValue]="user">
+          <option *ngFor="let user of users" value="{{user.username}}">
             {{user.name}}
           </option>
         </select>        
       </td>
         <td>
-            <select class="form-control" name="sel" 
+            <select class="form-control" name="selectType" 
             [(ngModel)]="event.type"
             [disabled]="editingEvent != event._id">
           <option *ngFor="let key of eventTypeKeys" [ngValue]="key">

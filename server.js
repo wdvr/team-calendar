@@ -138,7 +138,7 @@ app.post("/api/events", function(req, res) {
   newEvent.createDate = new Date();
 
   if (!req.body.user) {
-    handleError(res, "Invalid event input", "Must provide a name.", 400);
+    handleError(res, "Invalid event input", "Must provide a user for the event.", 400);
   }
   else if (!req.body.type) {
     handleError(res, "Invalid event input", "Must provide an event type.", 400);
