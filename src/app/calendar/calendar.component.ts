@@ -75,6 +75,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('today is ', new Date());
     this.userService
     .getUsers()
     .then((users: User[]) => {
@@ -84,9 +85,11 @@ export class CalendarComponent implements OnInit {
       .then((events: VacationEvent[]) => {
         events.forEach(e => {
           const eventUser = this.users.filter(user => user.username === e.user)[0];
-          e.title = eventUser.name + ': ' + this.eventTypes[e.type];
-          e.color.primary = eventUser.color;
-          e.color.secondary = eventUser.color;
+          if (eventUser) {
+            e.title = eventUser.name + ': ' + this.eventTypes[e.type];
+            e.color.primary = eventUser.color;
+            e.color.secondary = eventUser.color;
+          }
         });
        this.events = events;
        this.refresh.next();

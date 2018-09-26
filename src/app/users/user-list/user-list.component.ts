@@ -24,6 +24,17 @@ export class UserListComponent implements OnInit {
       });
   }
 
+  getInitials = function (fullname: String) {
+    const names = fullname.split(' ');
+    let initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
+};
+
+
   private getIndexOfUser = (userId: String) => {
     return this.users.findIndex((user) => {
       return user._id === userId;

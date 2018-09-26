@@ -100,15 +100,15 @@
   <br><br><br>
   
   <h3>
-    Edit events
-    <button
-      class="btn btn-primary pull-right"
-      (click)="createEvent()">
-      Add new
-    </button>
-    <div class="clearfix"></div>
+    Event details
   </h3>
-  
+  <button
+  class="btn btn-primary pull-right"
+  (click)="createEvent()">
+  Add new
+</button>
+<div class="clearfix"></div>
+<br>
   <table class="table table-bordered">
   
     <thead>
@@ -148,7 +148,7 @@
             [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.start"
-            dateFormat="Y-m-dTH:i"
+            dateFormat="Y-m-d"
             altFormat="F j, Y H:i"
             placeholder="Not set">
         </td>
@@ -159,7 +159,7 @@
             [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.end"
-            dateFormat="Y-m-dTH:i"
+            dateFormat="Y-m-d"
             altFormat="F j, Y H:i"
             placeholder="Not set">
         </td>
