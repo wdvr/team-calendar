@@ -21,7 +21,7 @@
 
     <div class="form-group">
       <label for="user-color">Color</label>
-      <input class="form-control" name="user-color" type="color" [(ngModel)]="user.color">
+      <input class="form-control color" name="user-color" type="color" [(ngModel)]="user.color">
     </div>
 
     <button class="btn btn-primary" *ngIf="!user._id" (click)="createUser(user)">Create</button>

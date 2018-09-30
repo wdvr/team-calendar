@@ -110,20 +110,22 @@
 </button>
 <div class="clearfix"></div>
 <br>
-  <table class="table table-bordered">
+  <table class="table">
   
     <thead>
       <tr>
-        <th class="wide-column">Who?</th>
+        <th>Who?</th>
         <th class = "wide-column">Type</th>
         <th>Starts at</th>
         <th>Ends at</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
   
     <tbody>
       <tr *ngFor="let event of events; let index = index">
-        <td class="wide-column">
+        <td>
             <select class="form-control" name="selectUser" 
             [(ngModel)]="event.user"
             [disabled]="editingEvent != event._id" 
@@ -133,7 +135,7 @@
           </option>
         </select>        
       </td>
-        <td class="wide-column">
+        <td>
             <select class="form-control" name="selectType" 
             [(ngModel)]="event.type"
             [disabled]="editingEvent != event._id">
@@ -143,31 +145,36 @@
         </select>        
         </td>
         <td>
-          <input
-            class="form-control date-column"
-            type="text"
-            [disabled]="editingEvent != event._id"
-            mwlFlatpickr
-            [(ngModel)]="event.start"
-            (input)="startDateChanged(event)"
-            dateFormat="Y-m-d"
-            altFormat="F j, Y H:i"
-            placeholder="Not set">
-            <fa-icon icon="calendar" class="cal-icon" *ngIf="editingEvent == event._id"></fa-icon>
+            <div class="input-group">
+                <input
+                class="form-control"
+                type="text"
+                [disabled]="editingEvent != event._id"
+                mwlFlatpickr
+                [(ngModel)]="event.start"
+                (input)="startDateChanged(event)"
+                dateFormat="Y-m-d"
+                altFormat="F j, Y H:i"
+                placeholder="Not set">
+                <span class="input-group-addon"><fa-icon icon="calendar" class="glyphicon" *ngIf="editingEvent == event._id"></fa-icon>
+                </span>
+              </div>           
         </td>
         <td>
-          <input
-            class="form-control date-column"
-            type="text"
-            [disabled]="editingEvent != event._id"
-            mwlFlatpickr
-            [(ngModel)]="event.end"
-            (input)="endDateChanged(event)"
-            dateFormat="Y-m-d"
-            altFormat="F j, Y H:i"
-            placeholder="Not set">
-            <fa-icon icon="calendar" class="cal-icon" *ngIf="editingEvent == event._id"></fa-icon>
-        </td>
+            <div class="input-group">
+                <input
+                class="form-control"
+                type="text"
+                [disabled]="editingEvent != event._id"
+                mwlFlatpickr
+                [(ngModel)]="event.end"
+                (input)="endDateChanged(event)"
+                dateFormat="Y-m-d"
+                altFormat="F j, Y H:i"
+                placeholder="Not set">
+                <span class="input-group-addon"><fa-icon icon="calendar" class="glyphicon" *ngIf="editingEvent == event._id"></fa-icon>
+                </span>
+              </div>        </td>
         <td>
             <button
             class="btn btn-info"

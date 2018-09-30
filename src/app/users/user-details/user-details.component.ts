@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',

@@ -23,20 +23,14 @@ td, th {
   text-align: left;
 }
 
-.date-column {
-  width: 90px;
-}
 
-.date-column:disabled {
-  width: 80px;
-}
-
-.wide-column {
-  padding: 0px 30px;
-}
-
-.cal-icon {
+.input-group-addon {
   position: relative;
+  top: 7px;
   right: 20px;
-  color: lightgray;
+  color: rgb(117, 117, 117);
+}
+
+.btn-outline-secondary {
+  background: #fbfaf4
 }

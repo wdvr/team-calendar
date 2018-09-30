@@ -18,6 +18,8 @@ h1 {
     display: inline-block;
     background-color: #eee;
     border-radius: 4px;
+    margin: .1em;
+
   }
   nav a:visited, a:link {
     color: #607d8b;
@@ -26,6 +28,7 @@ h1 {
     color: #039be5;
     background-color: #cfd8dc;
   }
-  nav a.active {
+  nav#Navigation .active {
     color: #039be5;
+    background-color: #72787a;
   }

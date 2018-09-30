@@ -18,7 +18,13 @@
     text-align: center; margin-bottom: 0;
   }
   h4 {
-    position: relative;
+    font-size: large;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: smaller;
+    font-style: italic;
   }
   .grid {
     margin: 0;
@@ -33,7 +39,7 @@
     color: #eee;
     max-height: 120px;
     min-width: 120px;
-    background-color: #607d8b;
+    background-color: #724eda;
     border-radius: 2px;
   }
   .module:hover {

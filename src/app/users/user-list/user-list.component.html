@@ -7,10 +7,10 @@
           (click)="selectUser(user)"
           [class.active]="user === selectedUser">
           <span class="badge" [style.background]="user.color">{{getInitials(user.name)}}</span> 
-          {{user.name}}
+          <a>{{user.name}}</a>
         </li>
       </ul>
-      <button class="btn btn-warning" (click)="createNewUser()">New</button>
+      <button class="btn btn-primary" (click)="createNewUser()">New</button>
     </div>
     <div class="col-md-5 col-md-offset-2">
       <app-user-details

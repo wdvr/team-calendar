@@ -6,7 +6,6 @@
     width: 15em;
   }
   .users li {
-    position: relative;
     cursor: pointer;
     background-color: #EEE;
     margin: .5em;
@@ -24,6 +23,7 @@
     color: #888;
     text-decoration: none;
     position: relative;
+    left: 60px;
     display: block;
     width: 250px;
   }
@@ -35,11 +35,10 @@
   .users .badge {
     display: inline-block;
     font-size: small;
-    color: white;
-    /* padding: 0.8em 0.7em 0 0.7em; */
-    line-height: 1em;
+    color: rgb(245, 245, 245);
+    line-height: 2em;
     position: absolute;
-    left: -1px;
+    left: 0px;
     min-width: 50px;
     text-align: center;
     margin-right: .8em;
