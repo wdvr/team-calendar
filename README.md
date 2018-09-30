@@ -19,7 +19,9 @@ run `npm install`
 ## Development server
 
 run `mongod` in one terminal.
+
 run `npm start` in another to run both client and server.
+
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files (client and server).
 
 ## Build
