@@ -29,6 +29,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests & end-to-end tests
 Ain't nobody got time for that.
 
+## More
+
+This calendar comes with an accompanying Mattermost and Slack chatbot (under development): https://github.com/wdvr/team-calendar-bot/tree/master
+
 ## Further help
 
 To report bugs or feature requests, use the issue tracker in Github. Pull requests welcome.
