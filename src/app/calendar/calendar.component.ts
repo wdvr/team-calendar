@@ -132,13 +132,25 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  startDateChanged(event) {
+    event.start = startOfDay(event.start);
+    if (event.end < event.start) {
+      event.end = endOfDay(event.start);
+    }
+    console.log('start date: ' + event.start);
+  }
+
+  endDateChanged(event) {
+    event.end = endOfDay(event.end);
+    console.log('end date: ' + event.end);
+  }
+
   editEvent(eventId: String) {
     this.editingEvent = eventId;
   }
 
   createEvent() {
     const event = {
-      // TODO CHANGE THIS
       title: '',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
@@ -148,9 +160,8 @@ export class CalendarComponent implements OnInit {
         beforeStart: true,
         afterEnd: true
       },
-      // TODO CHANGE THIS
       user: 'newuser',
-      type: Eventtype.vacation
+      type: Eventtype.VACATION
     };
 
     this.eventService.createEvent(event).then((newEvent: VacationEvent) => {

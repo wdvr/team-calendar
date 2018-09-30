@@ -1,6 +1,6 @@
 export enum Eventtype {
-    workfromhome = 'Working from home',
-    sickday = 'Sick day',
-    onsite = 'Site visit',
-    vacation = 'Vacation'
+    WORK_FROM_HOME = 'Working from home',
+    SICK_DAY = 'Sick day',
+    ON_SITE = 'Site visit',
+    VACATION = 'Vacation'
 }

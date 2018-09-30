@@ -48,24 +48,25 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-    </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          (click)="view = CalendarView.Month"
-          [class.active]="view === CalendarView.Month">
-          Month
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="view = CalendarView.Week"
-          [class.active]="view === CalendarView.Week">
-          Week
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="view = CalendarView.Month"
+            [class.active]="view === CalendarView.Month">
+            Month view
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="view = CalendarView.Week"
+            [class.active]="view === CalendarView.Week">
+            Week view
+          </div>
         </div>
       </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
+
   </div>
   <br>
   <div [ngSwitch]="view">
@@ -113,8 +114,8 @@
   
     <thead>
       <tr>
-        <th>Who?</th>
-        <th>Type</th>
+        <th class="wide-column">Who?</th>
+        <th class = "wide-column">Type</th>
         <th>Starts at</th>
         <th>Ends at</th>
       </tr>
@@ -122,7 +123,7 @@
   
     <tbody>
       <tr *ngFor="let event of events; let index = index">
-        <td>
+        <td class="wide-column">
             <select class="form-control" name="selectUser" 
             [(ngModel)]="event.user"
             [disabled]="editingEvent != event._id" 
@@ -132,7 +133,7 @@
           </option>
         </select>        
       </td>
-        <td>
+        <td class="wide-column">
             <select class="form-control" name="selectType" 
             [(ngModel)]="event.type"
             [disabled]="editingEvent != event._id">
@@ -143,51 +144,51 @@
         </td>
         <td>
           <input
-            class="form-control"
+            class="form-control date-column"
             type="text"
             [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.start"
+            (input)="startDateChanged(event)"
             dateFormat="Y-m-d"
             altFormat="F j, Y H:i"
             placeholder="Not set">
+            <fa-icon icon="calendar" class="cal-icon" *ngIf="editingEvent == event._id"></fa-icon>
         </td>
         <td>
           <input
-            class="form-control"
+            class="form-control date-column"
             type="text"
             [disabled]="editingEvent != event._id"
             mwlFlatpickr
             [(ngModel)]="event.end"
+            (input)="endDateChanged(event)"
             dateFormat="Y-m-d"
             altFormat="F j, Y H:i"
             placeholder="Not set">
+            <fa-icon icon="calendar" class="cal-icon" *ngIf="editingEvent == event._id"></fa-icon>
         </td>
         <td>
             <button
-            class="btn btn-info fa-pencil"
+            class="btn btn-info"
             (click)="editEvent(event._id); refresh.next()"
             *ngIf="editingEvent != event._id">
-            Edit
-          </button>
-        </td>
-        <td>
+            <fa-icon icon="pencil-alt"></fa-icon>
 
+          </button>
           <button
-          class="btn btn-info fa-pencil"
+          class="btn btn-info"
           (click)="updateEvent(event); refresh.next()"
           *ngIf="editingEvent == event._id">
-          Save
+            <fa-icon icon="save" ></fa-icon>
         </button>
       </td>
       <td>
-
           <button
-          class="btn btn-info fa-pencil"
+          class="btn btn-info"
           (click)="deleteEvent(event._id); refresh.next()">
-          Delete
+            <fa-icon icon="trash"></fa-icon>
         </button>
-
         </td>
       </tr>
     </tbody>

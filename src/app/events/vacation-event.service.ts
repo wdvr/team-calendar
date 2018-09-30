@@ -13,23 +13,6 @@ import {
   CalendarEvent,
 } from 'angular-calendar';
 import { VacationEvent } from './vacation-event';
-import { Eventtype } from './eventtype.enum';
-import { User } from '../users/user';
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +37,6 @@ export class VacationEventService {
 
   // post("/api/events")
   createEvent(newEvent: VacationEvent): Promise<void | VacationEvent> {
-    console.log('will create event: ', newEvent);
     return this.http.post(this.eventsUrl, newEvent)
       .toPromise()
       .then(response => response.json() as VacationEvent)

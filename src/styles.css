@@ -1,42 +1,10 @@
 /* Application-wide Styles */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import '../node_modules/flatpickr/dist/flatpickr.css'; 
-h1 {
-    color: #369;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 250%;
-  }
-  h2, h3 {
-    color: #444;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: lighter;
-  }
-  body {
+
+body {
     margin: 2em;
-  }
-  body, input[text], button {
-    color: #888;
-    font-family: Cambria, Georgia;
-  }
-
-
-  .btn {
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-left: 5px;
-    display: inline-block;
-    background-color: #eee;
-    border-radius: 4px;
-    border: 2px solid #ddd;
-  }
-  .btn:hover {
-    color: #039be5;
-    background-color: #cfd8dc;
-  }
-
-  /* everywhere else */
-  * {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+}
+ 
   
  

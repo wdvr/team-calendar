@@ -136,7 +136,7 @@ app.get("/api/events", function(req, res) {
 app.post("/api/events", function(req, res) {
   var newEvent = req.body;
   newEvent.createDate = new Date();
-
+  console.log(req.body)
   if (!req.body.user) {
     handleError(res, "Invalid event input", "Must provide a user for the event.", 400);
   }
@@ -179,6 +179,7 @@ app.get("/api/events/:id", function(req, res) {
 app.put("/api/events/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
+  console.log(req.body)
 
   db.collection(EVENTS).replaceOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {

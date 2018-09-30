@@ -18,6 +18,16 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { CalendarUpcomingComponent } from './calendar-upcoming/calendar-upcoming.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPencilAlt, faTrash, faSave, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+library.add(faPencilAlt);
+library.add(faTrash);
+library.add(faSave);
+library.add(faCalendar);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +46,9 @@ import { CalendarUpcomingComponent } from './calendar-upcoming/calendar-upcoming
       useFactory: adapterFactory
     }),
     FlatpickrModule.forRoot(),
-    HttpModule
+    HttpModule,
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <h3>First upcoming vacations</h3>
 <div class="grid grid-pad">
   <a *ngFor="let event of events" class="col-1-4" >
-    <div class="module hero">
+    <div class="module">
         <h4>{{getFullName(event.user)}}<br>{{eventTypes[event.type]}}</h4>
         <p>{{event.start.toLocaleDateString()}} - {{event.end.toLocaleDateString()}}</p>
       </div>
