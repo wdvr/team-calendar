@@ -33,7 +33,7 @@ export class CalendarUpcomingComponent implements OnInit {
         this.eventService.getEvents()
           .then((events: VacationEvent[]) => {
             this.events = events.filter(e => e.end > startOfDay(new Date()))
-              .sort((d1, d2) => d2.start.getDate() - d1.start.getDate())
+              .sort((d1, d2) => d1.start.getDate() - d2.start.getDate())
               .slice(0, 4);
           });
       });

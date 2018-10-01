@@ -5,4 +5,12 @@
 body {
     margin: 2em;
 }
- 
+
+
+mwl-calendar-month-view.team-cal .cal-day-badge {
+  background-color: #545454;
+}
+
+mwl-calendar-week-view.team-cal .cal-event-title {
+  color: aliceblue
+}

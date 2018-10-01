@@ -23,7 +23,6 @@ td, th {
   text-align: left;
 }
 
-
 .input-group-addon {
   position: relative;
   top: 7px;
@@ -34,3 +33,8 @@ td, th {
 .btn-outline-secondary {
   background: #fbfaf4
 }
+
+mwl-calendar-month-view.team-cal .cal-day-badge {
+  background-color: #383838;
+}
+

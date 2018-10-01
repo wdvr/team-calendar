@@ -124,7 +124,17 @@ app.delete("/api/users/:id", function(req, res) {
  */
 
 app.get("/api/events", function(req, res) {
-  db.collection(EVENTS).find({}).toArray(function(err, docs) {
+  query = {}
+  if(req.query.start){
+    console.log("user asks start: ", req.query.start);
+    query["end"] = {"$gt": req.query.start}
+  }
+  if(req.query.end){
+    console.log("user asks end: ", req.query.end);
+    query["start"] = {"$lt": req.query.end}
+  }
+  console.log(query)
+  db.collection(EVENTS).find(query).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get events.");
     } else {
