@@ -7,9 +7,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "client": "ng serve --proxy-config server.conf.json",
+    "client": "ng serve",
     "server": "nodemon server.js",
-    "start": "npm-run-all -p client server "
   },
   "private": true,
   "dependencies": {
