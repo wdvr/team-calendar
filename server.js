@@ -18,6 +18,11 @@ var allowCrossDomain = function(req, res, next) {
 app.use(bodyParser.json());
 app.use(allowCrossDomain);
 
+// serve the frontens
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/dist/index.html');
+});
+
 let port = process.env.PORT || 8080;
 let dbport = process.env.DB_PORT || 27017;
 
