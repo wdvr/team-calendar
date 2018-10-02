@@ -1,0 +1,7 @@
+{
+	"api_protocol":"http://",
+	"api_domain":"localhost",
+	"api_listen_port": 8080,
+	"api_serve_port": 8080,
+	"db_port":27017
+}
