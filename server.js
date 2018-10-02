@@ -235,4 +235,10 @@ app.delete("/api/events/:id", function(req, res) {
 
 
 // serve the frontend
-app.use('*', (req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
+app.use('*', (req, res) => {
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(path.resolve(`public/${req.url}`));
+  } else {
+    res.sendFile(path.resolve('dist/index.html'));
+  }
+});
