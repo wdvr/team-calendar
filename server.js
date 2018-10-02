@@ -8,19 +8,6 @@ var EVENTS = "events";
 
 var app = express();
 
-// Allowed extensions list can be extended depending on your own needs
-const allowedExt = [
-  '.js',
-  '.ico',
-  '.css',
-  '.png',
-  '.jpg',
-  '.woff2',
-  '.woff',
-  '.ttf',
-  '.svg',
-];
-
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -43,7 +30,6 @@ let dbport = process.env.DB_PORT || 27017;
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
-
 
 
 // Connect to the database before starting the application server.
@@ -242,9 +228,5 @@ app.delete("/api/events/:id", function(req, res) {
 
 // serve the frontend
 app.use('*', (req, res) => {
-  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-    res.sendFile(path.resolve(`public/${req.url}`));
-  } else {
     res.sendFile(path.resolve('dist/index.html'));
-  }
 });
