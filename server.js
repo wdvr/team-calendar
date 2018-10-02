@@ -8,6 +8,19 @@ var EVENTS = "events";
 
 var app = express();
 
+// Allowed extensions list can be extended depending on your own needs
+const allowedExt = [
+  '.js',
+  '.ico',
+  '.css',
+  '.png',
+  '.jpg',
+  '.woff2',
+  '.woff',
+  '.ttf',
+  '.svg',
+];
+
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -17,12 +30,7 @@ var allowCrossDomain = function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(allowCrossDomain);
-app.use('/', express.static(__dirname + '/dist'));
-
-// serve the frontens
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/dist/index.html');
-});
+app.use(express.static(__dirname + '/dist'));
 
 let port = process.env.PORT || 8080;
 let dbport = process.env.DB_PORT || 27017;
@@ -224,3 +232,7 @@ app.delete("/api/events/:id", function(req, res) {
     }
   });
 });
+
+
+// serve the frontend
+app.use('*', (req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
