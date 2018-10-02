@@ -17,6 +17,7 @@ var allowCrossDomain = function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(allowCrossDomain);
+app.use('/', express.static(__dirname + '/dist'));
 
 // serve the frontens
 app.get('/', function (req, res) {
