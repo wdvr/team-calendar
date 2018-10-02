@@ -13,13 +13,14 @@ import {
   CalendarEvent,
 } from 'angular-calendar';
 import { VacationEvent } from './vacation-event';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class VacationEventService {
-  private eventsUrl = '/api/events';
+  private eventsUrl = environment.api_url + '/events';
 
   constructor(private http: Http) { }
   events: VacationEvent[];

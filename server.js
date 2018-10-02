@@ -9,13 +9,8 @@ var EVENTS = "events";
 var app = express();
 app.use(bodyParser.json());
 
-let fs = require('fs');
-let config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-
-let port = config.api_serve_port;
-let domain = config.api_domain;
-let protocol = config.api_protocol;
-let dbport = config.db_port;
+let port = process.env.PORT || 8080;
+let dbport = process.env.DB_PORT || 27017;
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
@@ -32,9 +27,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:"+db
   console.log("Database connection ready");
 
   // Initialize the app.
-  var server = app.listen(port || 8080, function () {
-    port = server.address().port;
-    console.log("App now running on port", port);
+  var server = app.listen(port, function () {
+    console.log("App now running on port", server.address().port);
   });
 });
 
