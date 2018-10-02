@@ -7,13 +7,24 @@ var USERS = "users";
 var EVENTS = "events";
 
 var app = express();
+
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}
+
 app.use(bodyParser.json());
+app.use(allowCrossDomain);
 
 let port = process.env.PORT || 8080;
 let dbport = process.env.DB_PORT || 27017;
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
+
+
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:"+dbport+"/calendar", function (err, client) {
@@ -128,14 +139,11 @@ app.delete("/api/users/:id", function(req, res) {
 app.get("/api/events", function(req, res) {
   query = {}
   if(req.query.start){
-    console.log("user asks start: ", req.query.start);
     query["end"] = {"$gt": req.query.start}
   }
   if(req.query.end){
-    console.log("user asks end: ", req.query.end);
     query["start"] = {"$lt": req.query.end}
   }
-  console.log(query)
   db.collection(EVENTS).find(query).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get events.");
@@ -148,7 +156,6 @@ app.get("/api/events", function(req, res) {
 app.post("/api/events", function(req, res) {
   var newEvent = req.body;
   newEvent.createDate = new Date();
-  console.log(req.body)
   if (!req.body.user) {
     handleError(res, "Invalid event input", "Must provide a user for the event.", 400);
   }
@@ -191,7 +198,6 @@ app.get("/api/events/:id", function(req, res) {
 app.put("/api/events/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
-  console.log(req.body)
 
   db.collection(EVENTS).replaceOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {

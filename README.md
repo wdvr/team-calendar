@@ -12,17 +12,19 @@ You will need to install:
 
 - node.js
 - mongoDB
-- npm-run-all
 
 run `npm install`
 
 ## Development server
 
-run `mongod` in one terminal.
-
-run `npm start` in another to run both client and server.
+You will need 3 processes running:
+- run `mongod` to start mongoDB
+- run `node server.js` to run the server (api)
+- run `ng serve` to start the client
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files (client and server).
+
+ports should be configured in environment.ts and environtment.prod.ts
 
 ## Build
 
