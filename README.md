@@ -8,12 +8,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Preparation
 
-You will need to install:
+You will need to:
 
-- node.js
-- mongoDB
-
-run `npm install`
+- install node.js
+- install mongoD
+- run `npm install`
+- Change team name (title) in app.component.ts
 
 ## Development server
 
