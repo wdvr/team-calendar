@@ -35,7 +35,7 @@ Ain't nobody got time for that.
 
 ## More
 
-This calendar comes with an accompanying Mattermost and Slack chatbot (under development): https://github.com/wdvr/team-calendar-bot/tree/master
+This calendar comes with an accompanying Mattermost and Slack chatbot (under development): https://github.com/wdvr/team-calendar-bot
 
 ## Further help
 
