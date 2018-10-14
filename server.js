@@ -226,7 +226,9 @@ app.delete("/api/events/:id", function(req, res) {
 });
 
 
+if(process.env.ENV == "PROD"){
 // serve the frontend
-app.use('*', (req, res) => {
+  app.use('*', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
-});
+  });
+}

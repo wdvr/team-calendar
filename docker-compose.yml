@@ -1,0 +1,36 @@
+version: '3.0' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+  backend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile-backend
+    environment:
+      - MONGODB_URI=mongodb://database:27017/calendar
+      - ENV=STAGING
+    ports:
+      - "8080:8080"
+    links:
+      - database
+  database:
+    container_name: mongodb
+    image: mongo
+    # volumes:
+    #   - ./data:/data/db
+    ports:
+      - "27017:27017"
+  frontend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile-frontend
+    restart: always
+    ports:
+      - "4200:4200"
+    links:
+      - database
+
+
+ 
