@@ -17,8 +17,8 @@ services:
   database:
     container_name: mongodb
     image: mongo
-    # volumes:
-    #   - ./data:/data/db
+    volumes:
+      - ./data:/data/db
     ports:
       - "27017:27017"
   frontend:
