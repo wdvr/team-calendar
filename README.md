@@ -6,6 +6,14 @@ TeamCalendar is an easy way to track your team's holidays, work from home days a
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
 
+The easiest way to run the project in debug mode (for development), is using docker. See Docker section below. It starts three containers, DB, backend and frontend, and reloads both backend and frontend on file changes. If you don't want to use docker, see the rest of this readme.
+
+## Docker
+
+Install docker, and docker-compose if necessary.
+
+Run `docker-compose up` to start all three containers.
+
 ## Preparation
 
 You will need to:

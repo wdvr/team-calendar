@@ -1,4 +1,0 @@
-# Ignore everything in this directory, since this is for persistent data
-*
-# Except this file
-!.gitignore
