@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-backend
+    command: nodemon -L server.js
+    volumes:
+      - ./:/app
     environment:
       - MONGODB_URI=mongodb://database:27017/calendar
       - ENV=STAGING
@@ -25,19 +28,22 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-frontend
+    command: ng serve --poll 1000 --host 0.0.0.0 --disable-host-check
+    volumes:
+      - ./:/app
     restart: always
     ports:
       - "4200:4200"
     links:
       - database
-  # bot:
-  #   build:
-  #     context: ../team-calendar-bot
-  #   restart: always
-  #   ports:
-  #     - "5000:5000"
-  #   links:
-  #     - backend
+  bot:
+    build:
+      context: ../team-calendar-bot
+    restart: always
+    ports:
+      - "5000:5000"
+    links:
+      - backend
 
 volumes:
   mongodata:
