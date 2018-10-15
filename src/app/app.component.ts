@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Icebird team calendar';
+  title = '[INSERT_TEAM_NAME] calendar';
 }
