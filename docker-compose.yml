@@ -1,6 +1,5 @@
-version: '3.0' # specify docker-compose version
+version: '3.0'
  
-# Define the services/ containers to be run
 services:
   backend:
     restart: always
@@ -31,5 +30,14 @@ services:
       - "4200:4200"
     links:
       - database
+  # bot:
+  #   build:
+  #     context: ../team-calendar-bot
+  #   restart: always
+  #   ports:
+  #     - "5000:5000"
+  #   links:
+  #     - backend
+
 volumes:
   mongodata:

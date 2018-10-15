@@ -14,6 +14,8 @@ Install docker, and docker-compose if necessary.
 
 Run `docker-compose up` to start all three containers.
 
+To add the team-calender-bot, uncomment the bot section of docker-compose.yml, and make sure 'context' points to the location of the source code for the calendar0bot 
+
 ## Preparation
 
 You will need to:
