@@ -36,14 +36,14 @@ services:
       - "4200:4200"
     links:
       - database
-  bot:
-    build:
-      context: ../team-calendar-bot
-    restart: always
-    ports:
-      - "5000:5000"
-    links:
-      - backend
+  # bot:
+  #   build:
+  #     context: ../team-calendar-bot
+  #   restart: always
+  #   ports:
+  #     - "5000:5000"
+  #   links:
+  #     - backend
 
 volumes:
   mongodata:
