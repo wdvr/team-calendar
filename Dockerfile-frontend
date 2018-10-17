@@ -1,4 +1,5 @@
 FROM teracy/angular-cli
+COPY . /app
 WORKDIR /app
 RUN npm install
 EXPOSE 4200

@@ -40,6 +40,9 @@ services:
   #   build:
   #     context: ../team-calendar-bot
   #   restart: always
+  #   volumes:
+  #     - ../team-calendar-bot/:/app
+  #   command: python ./mattermost.py
   #   ports:
   #     - "5000:5000"
   #   links:
