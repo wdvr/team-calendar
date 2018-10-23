@@ -1,0 +1,43 @@
+version: '3.0'
+ 
+services:
+  backend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile-prod
+    volumes:
+      - ./:/app
+    environment:
+      - MONGODB_URI=mongodb://database:27017/calendar
+      - ENV=PROD
+    ports:
+      - "8080:8080"
+    links:
+      - database
+  database:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27017:27017"
+  nginx:
+    build:
+      context: nginx-docker
+    ports:
+      -8080:80
+  # bot:
+  #   build:
+  #     context: ../team-calendar-bot
+  #   restart: always
+  #   volumes:
+  #     - ../team-calendar-bot/:/app
+  #   command: python ./mattermost.py
+  #   ports:
+  #     - "5000:5000"
+  #   links:
+  #     - backend
+
+volumes:
+  mongodata:
