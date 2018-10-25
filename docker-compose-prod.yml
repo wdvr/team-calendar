@@ -12,7 +12,7 @@ services:
       - MONGODB_URI=mongodb://database:27017/calendar
       - ENV=PROD
     ports:
-      - "8080:8080"
+      - "80:8080"
     links:
       - database
   database:
@@ -22,22 +22,17 @@ services:
       - mongodata:/data/db
     ports:
       - "27017:27017"
-  nginx:
+  bot:
     build:
-      context: nginx-docker
+      context: ../team-calendar-bot
+    restart: always
+    volumes:
+      - ../team-calendar-bot/:/app
+    command: python ./mattermost.py
     ports:
-      -8080:80
-  # bot:
-  #   build:
-  #     context: ../team-calendar-bot
-  #   restart: always
-  #   volumes:
-  #     - ../team-calendar-bot/:/app
-  #   command: python ./mattermost.py
-  #   ports:
-  #     - "5000:5000"
-  #   links:
-  #     - backend
+      - "5000:5000"
+    links:
+      - backend
 
 volumes:
   mongodata:
