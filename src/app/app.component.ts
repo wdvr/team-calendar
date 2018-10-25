@@ -7,5 +7,5 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = environment.team_name + '[INSERT_TEAM_NAME] calendar';
+  title = environment.team_name + ' calendar';
 }
