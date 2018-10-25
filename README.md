@@ -29,7 +29,7 @@ To add the team-calender-bot, uncomment the bot section of docker-compose.yml, a
 
 ## See it in action
 
-See this [link](http://team-calendar.ballooninc.be/calendar) for a live demo.
+See this [link](http://team-calendar.ballooninc.be) for a live demo.
 
 ![This is how it looks like](team-calendar-screenshot.png)
 
