@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-prod
-    volumes:
-      - ./:/app
     environment:
       - MONGODB_URI=mongodb://database:27017/calendar
       - ENV=PROD

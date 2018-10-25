@@ -24,7 +24,6 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/dist'));
 
 let port = process.env.PORT || 8080;
 let dbport = process.env.DB_PORT || 27017;
@@ -229,6 +228,9 @@ app.delete("/api/events/:id", function(req, res) {
 
 if(process.env.ENV == "PROD"){
 // serve the frontend
+  app.use(express.static(__dirname + '/dist'));
+
+  console.log("production, so also serving frontend")
   app.use('*', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
   });

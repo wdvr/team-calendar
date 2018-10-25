@@ -1,8 +1,9 @@
 FROM node:latest
+EXPOSE 80
+RUN npm install -g @angular/cli
 COPY . /app
 WORKDIR /app
 RUN npm install
-RUN npm install -g @angular/cli
 RUN ng build --configuration=production 
-EXPOSE 80
+#CMD ["bash"]
 CMD [ "node", "server.js" ]
